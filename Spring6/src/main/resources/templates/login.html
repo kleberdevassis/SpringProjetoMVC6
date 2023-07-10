@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>Página Inicial</title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+
+	    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    
+	
+	<style type="text/css">
+		
+		.login-card {
+  background-color: #f8f8f8;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 20px;
+  max-width: 400px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.card-header h1 {
+  font-size: 2em;
+  color: #333;
+  text-shadow: 1px 1px #ddd;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 1.2em;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  box-sizing: border-box;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #f0f0f0;
+  font-size: 1.2em;
+  color: #555;
+  box-shadow: inset 0px 2px 5px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+  box-shadow: inset 0px 2px 5px rgba(0, 0, 0, 0.3);
+  outline: none;
+}
+
+input[type="submit"] {
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1.2em;
+  padding: 10px;
+  transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+  background-color: #0069d9;
+}
+
+.login-button {
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1.2em;
+  padding: 10px;
+  width: 100%;
+  transition: background-color 0.3s ease;
+  transition: 0.25s;
+}
+
+.login-button:hover {
+  background-color: #0069d9e7;
+  -webkit-box-shadow: 0px 0px 30px 0px rgba(0,105,217,1);
+  -moz-box-shadow: 0px 0px 30px 0px rgba(0,105,217,1);
+  box-shadow: 0px 0px 30px 0px rgba(0,105,217,1);
+}
+
+
+</style>
+    
+</head>
+
+<body>
+
+
+	<div class="login-card">
+  <div class="card-header">
+    <h1>Login</h1>
+  </div>
+  <div class="card-body">
+    <form th:action="@{/login}" method="post">
+      <div class="form-group">
+        <label for="username">Login</label>
+        <input type="text" id="username" name="username" required="">
+      </div>
+      <div class="form-group">
+        <label for="password">Senha</label>
+        <input type="password" id="password" name="password" required="">
+      </div>
+      <div class="form-group">
+        <button type="submit" class="login-button">Logar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+	<!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+
+</html>
