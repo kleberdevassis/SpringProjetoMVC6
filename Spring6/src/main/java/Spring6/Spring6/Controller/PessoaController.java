@@ -27,7 +27,7 @@ public class PessoaController {
 	TelefoneRepository telefoneRepository;
 
 	
-	@GetMapping(value = "/cadastro")
+	@GetMapping(value = "**/cadastro")
 	public ModelAndView inicio() {
 		ModelAndView andView = new ModelAndView("cadastros/cadastro");
 		andView.addObject("pessoaobj", new Pessoa());
@@ -36,6 +36,7 @@ public class PessoaController {
 	}
 	@PostMapping(value = "**/salvarpessoa")
 	public ModelAndView salvarPessoa(Pessoa pessoa) {
+		pessoa.setTelefones(telefoneRepository.getTelefones(pessoa.getId()));
 		pessoaRepository.save(pessoa);
 		ModelAndView andView = new ModelAndView("cadastros/cadastro");
 		Iterable<Pessoa> pessoasit = pessoaRepository.findAll();
@@ -55,7 +56,7 @@ public class PessoaController {
 	}
 	
 	
-	@GetMapping(value="**/editarpessoa/{idpessoa}")
+	@GetMapping(value="/editarpessoa/{idpessoa}")
 	public ModelAndView editar(@PathVariable("idpessoa")Long idpessoa) {
 		Optional<Pessoa> pessoa = pessoaRepository.findById(idpessoa);
 		ModelAndView andView = new ModelAndView("cadastros/cadastro");

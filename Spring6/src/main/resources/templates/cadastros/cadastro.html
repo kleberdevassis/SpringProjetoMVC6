@@ -8,87 +8,149 @@
 
 	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"
+		integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+
 	<!-- Compiled and minified CSS -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
 
-    <style>
-        body {
-            background-color: rgb(255, 255, 255);
-            color: #fff;
-        }
-        .btn-submit {
-            background-color: rgb(0, 0, 255) !important;
-            color: rgb(255, 255, 255) !important;
-        }
-        .btn-listapessoas {
-            background-color: rgb(0, 0, 255) !important;
-            color: rgb(255, 255, 255) !important;
-        }
-        .btn-editarpessoa {
-            background-color: darkslategray !important;
-            color: white !important;
-        }
-        .btn-excluirpessoa {
-            background-color: rgb(64, 128, 128) !important;
-            color: white !important;
-        }
-        .table-header {
-            color: #000000;
-        }
-        .table-cell {
-            color: #000000;
-        }
-        .btn-submit:hover,
-        .btn-listapessoas:hover,
-        .btn-editarpessoa:hover {
-            background-color: #00ff5d !important;
-            color: #000 !important;
-        }
-        .btn-excluirpessoa:hover {
-            background-color: rgb(128, 0, 0) !important;
-            color: rgb(255, 255, 255) !important;
-        }
-    </style>
-	
-	
+	<style>
+		body {
+			background-color: rgb(255, 255, 255);
+			color: #fff;
+		}
+
+		.btn-submit {
+			background-color: rgb(0, 0, 255) !important;
+			color: rgb(255, 255, 255) !important;
+		}
+
+		.btn-listapessoas {
+			background-color: rgb(0, 0, 255) !important;
+			color: rgb(255, 255, 255) !important;
+		}
+
+		.btn-editarpessoa {
+			background-color: darkslategray !important;
+			color: white !important;
+		}
+
+		.btn-excluirpessoa {
+			background-color: rgb(64, 128, 128) !important;
+			color: white !important;
+		}
+
+		.table-header {
+			color: #000000;
+		}
+
+		.table-cell {
+			color: #000000;
+		}
+
+		.btn-submit:hover,
+		.btn-listapessoas:hover,
+		.btn-editarpessoa:hover {
+			background-color: #00ff5d !important;
+			color: #000 !important;
+		}
+
+		.btn-excluirpessoa:hover {
+			background-color: rgb(128, 0, 0) !important;
+			color: rgb(255, 255, 255) !important;
+		}
+	</style>
+
+
 </head>
 
 <body>
-	
-	<a class="waves-effect waves-light btn" href="/index">Voltar</a>
+
+	<a class="waves-effect waves-light btn" href="/login">Voltar</a>
 
 	<h3>CADASTROS</h3>
 
-	<form action="salvarpessoa" method="post" th:object="${pessoaobj}" 
-	id="formpessoa" class="input-field col s12"onsubmit="return validarCampos()? true : false">
+	<form action="salvarpessoa" method="post" th:object="${pessoaobj}" id="formpessoa" class="input-field col s12"
+		onsubmit="return validarCampos()? true : false">
 
 		<div class="row">
 			<div class="input-field col s6">
 				<label for="id" class="active">ID</label><input name="id" th:field="*{id}" id="id" readonly="readonly">
 			</div>
 		</div>
-		<div class="row">
-		<div class="input-field col s12">
-				<label for="nome" class="active">Nome</label><input name="nome" th:field="*{nome}" id="nome"
-					class="validate">
-			</div>
-			</div>
 
 		<div class="row">
 			<div class="input-field col s6">
-				<label for="sobrenome" class="active">Sobrenome</label><input name="sobrenome" id="sobrenome"
-					class="validade" th:field="*{sobrenome}">
+				<label for="nome" class="active">Nome</label><input placeholder="informe o nome" name="nome"
+					th:field="*{nome}" id="nome" class="validate">
 			</div>
 			<div class="input-field col s6">
-				<label for="idade" class="active">Idade</label><input name="idade" id="idade" class="validade"
-					th:field="*{idade}">
+				<label for="sobrenome" class="active">Sobrenome</label><input placeholder="informe o sobrenome"
+					name="sobrenome" id="sobrenome" class="validade" th:field="*{sobrenome}">
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="input-field col s6">
+				<label for="idade" class="active">Idade</label><input placeholder="informe a idade" name="idade"
+					id="idade" class="validade" th:field="*{idade}">
+			</div>
+         <div class=""input-field col s6>
+			 <label for="sexopessoa" class="active">Sexo</label>
+			 <select class="browser-default" th:field="*{sexopessoa}">
+				 <option value="" disabled selected>--[Selecione]</option>
+				 <option value="MASCULINO" th:text="Masculino"/>
+				 <option value="FEMININO" th:text="Feminino"/>
+			 </select>
+		 </div>
+		 </div>
+
+		<div class="row">
+			<div class="input-field col s12">
+				<label for="cep" class="active">Cep</label><input placeholder="informe um cep válido" name="cep"
+					id="cep" class="validade" th:field="*{cep}">
 			</div>
 		</div>
 
 		<div class="row">
-			<div class="input-field col s6">
-				<input class="waves-effect waves-light btn btn-submit"th:class="${'btn-submit'}" value="salvar" type="submit">
+			<div class="input-field col s12">
+				<label for="rua" class="active">Rua</label><input name="rua" id="rua" class="validade"
+					th:field="*{rua}">
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="input-field col s12">
+				<label for="bairro" class="active">Bairro</label><input name="bairro" id="bairro" class="validade"
+					th:field="*{bairro}">
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="input-field col s12">
+				<label for="cidade" class="active">Cidade</label><input name="cidade" id="cidade" class="validade"
+					th:field="*{cidade}">
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="input-field col s12">
+				<label for="uf" class="active">Uf</label><input name="uf" id="uf" class="validade" th:field="*{uf}">
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="input-field col s12">
+				<label for="ibge" class="active">Ibge</label><input name="ibge" id="ibge" class="validade"
+					th:field="*{ibge}">
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="input-field col s12">
+				<input class="waves-effect waves-light btn btn-submit" th:class="${'btn-submit'}" value="salvar"
+					type="submit">
 			</div>
 		</div>
 	</form>
@@ -98,82 +160,157 @@
 	</br>
 
 
-<form th:action="@{/buscapornome}" method="post" class="input-field col s12" onsubmit="return validarBusca()? true : false">
-    <div class="row">
-        <div class="inpu-field col s12">
-            <label for="nomevalor" class="active">BuscarNome</label>
-            <input name="nomevalor" id="nomevalor" class="validade">
-            <input class="waves-effect waves-light btn btn-submit" th:class="${'btn-submit'}" value="buscar" type="submit">
-        </div>
-    </div>
-</form>
+	<form th:action="@{/buscapornome}" method="post" class="input-field col s12"
+		onsubmit="return validarBusca()? true : false">
+		<div class="row">
+			<div class="inpu-field col s12">
+				<label for="nomevalor" class="active">BuscarNome</label>
+				<input placeholder="digite um nome" name="nomevalor" id="nomevalor" class="validade">
+				<input class="waves-effect waves-light btn btn-submit" th:class="${'btn-submit'}" value="buscar"
+					type="submit">
+			</div>
+		</div>
+	</form>
 
 
 	<button onclick="window.location.href='listapessoas'" class="waves-effect waves-light btn btn-listapessoas"
-        type="button">Lista de Pessoas</button>
+		type="button">Lista de Pessoas</button>
 
 
 
 	<table class="striped">
-    <thead>
-        <tr>
-            <th class="table-header">ID</th>
-            <th class="table-header">NOME</th>
-            <th class="table-header">SOBRENOME</th>
-            <th class="table-header">IDADE</th>
-            <th class="table-header">EDITAR</th>
-            <th class="table-header">EXCLUIR</th>
-        </tr>
-    </thead>
-    <tr th:each="pessoa : ${pessoas}">
-        <td class="table-cell" th:text="${pessoa.id}"></td>
-        <td class="table-cell"><a th:href="@{'/telefones/' + ${pessoa.id}}"><span th:text="${pessoa.nome}"></span></a></td>
-        <td class="table-cell" th:text="${pessoa.sobrenome}"></td>
-        <td class="table-cell" th:text="${pessoa.idade}"></td>
-        <td class="table-cell"><a th:href="@{/editarpessoa/{idpessoa}(idpessoa=${pessoa.id})}"class="waves-effect waves-light btn btn-editarpessoa"th:class="${'btn-editarpessoa'}" >Editar</a></td>
-        <td class="table-cell"><a th:href="@{/excluirpessoa/{idpessoa}(idpessoa=${pessoa.id})}"class="waves-effect waves-light btn btn-excluirpessoa"th:class="${'btn-excluirpessoa'}">Excluir</a></td>
-    </tr>
-</table>
+		<thead>
+			<tr>
+				<th class="table-header">ID</th>
+				<th class="table-header">NOME</th>
+				<th class="table-header">SOBRENOME</th>
+				<th class="table-header">IDADE</th>
+				<th class="table-header">EDITAR</th>
+				<th class="table-header">EXCLUIR</th>
+			</tr>
+		</thead>
+		<tr th:each="pessoa : ${pessoas}">
+			<td class="table-cell" th:text="${pessoa.id}"></td>
+			<td class="table-cell"><a th:href="@{'/telefones/' + ${pessoa.id}}"><span
+						th:text="${pessoa.nome}"></span></a></td>
+			<td class="table-cell" th:text="${pessoa.sobrenome}"></td>
+			<td class="table-cell" th:text="${pessoa.idade}"></td>
+			<td class="table-cell"><a th:href="@{/editarpessoa/{idpessoa}(idpessoa=${pessoa.id})}"
+					class="waves-effect waves-light btn btn-editarpessoa" th:class="${'btn-editarpessoa'}">Editar</a>
+			</td>
+			<td class="table-cell"><a th:href="@{/excluirpessoa/{idpessoa}(idpessoa=${pessoa.id})}"
+					class="waves-effect waves-light btn btn-excluirpessoa" th:class="${'btn-excluirpessoa'}">Excluir</a>
+			</td>
+		</tr>
+	</table>
 
 
 
 	<!-- Compiled and minified JavaScript -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
-<script type="text/javascript">
-  function validarCampos(){
-	  nome = document.getElementById('nome').value;
-	  sobrenome = document.getElementById('sobrenome').value;
-	  idade = document.getElementById('idade').value;
-	  
-	  if (nome === ''){
-		  alert('Nome deve ser informado');
-		  return false;
-	  }
-	  else if (sobrenome === '') {
-		  alert('Sobrenome deve ser informado');
-		  return false;
-	  }else if (idade === '') {
-		  alert('Idade deve ser informada');
-		  return false;
-	  }
-	  return true;
-  }
- </script>
- 
- 
- <script type="text/javascript">
-  function validarBusca(){
-	  nomevalor = document.getElementById('nomevalor').value;
+	<script type="text/javascript">
+		function validarCampos() {
+			nome = document.getElementById('nome').value;
+			sobrenome = document.getElementById('sobrenome').value;
+			idade = document.getElementById('idade').value;
 
-	  if (nomevalor === ''){
-		  alert('Nome deve ser informado');
-		  return false;
-	  }
-	  return true;
-  }
-  
- </script>
+			if (nome === '') {
+				alert('Nome deve ser informado');
+				return false;
+			}
+			else if (sobrenome === '') {
+				alert('Sobrenome deve ser informado');
+				return false;
+			} else if (idade === '') {
+				alert('Idade deve ser informada');
+				return false;
+			}
+			return true;
+		}
+	</script>
+
+
+	<script type="text/javascript">
+		function validarBusca() {
+			nomevalor = document.getElementById('nomevalor').value;
+
+			if (nomevalor === '') {
+				alert('Nome deve ser informado');
+				return false;
+			}
+			return true;
+		}
+
+	</script>
+
+	<script>
+
+		$(document).ready(function () {
+
+			function limpa_formulário_cep() {
+				// Limpa valores do formulário de cep.
+				$("#rua").val("");
+				$("#bairro").val("");
+				$("#cidade").val("");
+				$("#uf").val("");
+				$("#ibge").val("");
+			}
+
+			//Quando o campo cep perde o foco.
+			$("#cep").blur(function () {
+
+				//Nova variável "cep" somente com dígitos.
+				var cep = $(this).val().replace(/\D/g, '');
+
+				//Verifica se campo cep possui valor informado.
+				if (cep != "") {
+
+					//Expressão regular para validar o CEP.
+					var validacep = /^[0-9]{8}$/;
+
+					//Valida o formato do CEP.
+					if (validacep.test(cep)) {
+
+						//Preenche os campos com "..." enquanto consulta webservice.
+						$("#rua").val("...");
+						$("#bairro").val("...");
+						$("#cidade").val("...");
+						$("#uf").val("...");
+						$("#ibge").val("...");
+
+						//Consulta o webservice viacep.com.br/
+						$.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function (dados) {
+
+							if (!("erro" in dados)) {
+								//Atualiza os campos com os valores da consulta.
+								$("#rua").val(dados.logradouro);
+								$("#bairro").val(dados.bairro);
+								$("#cidade").val(dados.localidade);
+								$("#uf").val(dados.uf);
+								$("#ibge").val(dados.ibge);
+							} //end if.
+							else {
+								//CEP pesquisado não foi encontrado.
+								limpa_formulário_cep();
+								alert("CEP não encontrado.");
+							}
+						});
+					} //end if.
+					else {
+						//cep é inválido.
+						limpa_formulário_cep();
+						alert("Formato de CEP inválido.");
+					}
+				} //end if.
+				else {
+					//cep sem valor, limpa formulário.
+					limpa_formulário_cep();
+				}
+			});
+		});
+
+	</script>
 
 </body>
 
