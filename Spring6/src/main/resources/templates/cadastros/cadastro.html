@@ -4,7 +4,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>CADASTRO</title>
+	
 
 	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 
@@ -48,6 +48,13 @@
 		.table-cell {
 			color: #000000;
 		}
+		h3 {
+			color: #000; /* Defina a cor desejada para o texto do h3 */
+		}
+		
+		legend {
+		color: #000; /* Defina a cor desejada para o texto do legend, por exemplo, preto (#000) */
+	}
 
 		.btn-submit:hover,
 		.btn-listapessoas:hover,
@@ -65,146 +72,168 @@
 
 </head>
 
-<body>
 
 	<a class="waves-effect waves-light btn" href="/login">Voltar</a>
-
-	<h3>CADASTROS</h3>
-
-	<form action="salvarpessoa" method="post" th:object="${pessoaobj}" id="formpessoa" class="input-field col s12"
-		onsubmit="return validarCampos()? true : false">
-
-		<div class="row">
-			<div class="input-field col s6">
-				<label for="id" class="active">ID</label><input name="id" th:field="*{id}" id="id" readonly="readonly">
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="input-field col s6">
-				<label for="nome" class="active">Nome</label><input placeholder="informe o nome" name="nome"
-					th:field="*{nome}" id="nome" class="validate">
-			</div>
-			<div class="input-field col s6">
-				<label for="sobrenome" class="active">Sobrenome</label><input placeholder="informe o sobrenome"
-					name="sobrenome" id="sobrenome" class="validade" th:field="*{sobrenome}">
-			</div>
-		</div>
-		
-		<div class="row">
-			<div class="input-field col s6">
-				<label for="idade" class="active">Idade</label><input placeholder="informe a idade" name="idade"
-					id="idade" class="validade" th:field="*{idade}">
-			</div>
-         <div class=""input-field col s6>
-			 <label for="sexopessoa" class="active">Sexo</label>
-			 <select class="browser-default" th:field="*{sexopessoa}">
-				 <option value="" disabled selected>--[Selecione]</option>
-				 <option value="MASCULINO" th:text="Masculino"/>
-				 <option value="FEMININO" th:text="Feminino"/>
-			 </select>
-		 </div>
-		 </div>
-
-		<div class="row">
-			<div class="input-field col s12">
-				<label for="cep" class="active">Cep</label><input placeholder="informe um cep válido" name="cep"
-					id="cep" class="validade" th:field="*{cep}">
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="input-field col s12">
-				<label for="rua" class="active">Rua</label><input name="rua" id="rua" class="validade"
-					th:field="*{rua}">
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="input-field col s12">
-				<label for="bairro" class="active">Bairro</label><input name="bairro" id="bairro" class="validade"
-					th:field="*{bairro}">
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="input-field col s12">
-				<label for="cidade" class="active">Cidade</label><input name="cidade" id="cidade" class="validade"
-					th:field="*{cidade}">
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="input-field col s12">
-				<label for="uf" class="active">Uf</label><input name="uf" id="uf" class="validade" th:field="*{uf}">
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="input-field col s12">
-				<label for="ibge" class="active">Ibge</label><input name="ibge" id="ibge" class="validade"
-					th:field="*{ibge}">
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="input-field col s12">
-				<input class="waves-effect waves-light btn btn-submit" th:class="${'btn-submit'}" value="salvar"
-					type="submit">
-			</div>
-		</div>
-	</form>
-
-	</br>
-	</br>
-	</br>
+	
+	<body>
 
 
-	<form th:action="@{/buscapornome}" method="post" class="input-field col s12"
-		onsubmit="return validarBusca()? true : false">
-		<div class="row">
-			<div class="inpu-field col s12">
-				<label for="nomevalor" class="active">BuscarNome</label>
-				<input placeholder="digite um nome" name="nomevalor" id="nomevalor" class="validade">
-				<input class="waves-effect waves-light btn btn-submit" th:class="${'btn-submit'}" value="buscar"
-					type="submit">
-			</div>
-		</div>
-	</form>
+</br>
+</br>
+</br>
+>
+		<fieldset>
+			<legend>Cadastro de Pessoas</legend>
+			<form action="salvarpessoa" method="post" th:object="${pessoaobj}" id="formpessoa" class="input-field col s12"
+				onsubmit="return validarCampos()? true : false">
+
+				<div class="row">
+					<div class="input-field col s6">
+						<label for="id" class="active">ID</label><input name="id" th:field="*{id}" id="id" readonly="readonly">
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="input-field col s6">
+						<label for="nome" class="active">Nome</label><input placeholder="informe o nome" name="nome"
+							th:field="*{nome}" id="nome" class="validate">
+					</div>
+					<div class="input-field col s6">
+						<label for="sobrenome" class="active">Sobrenome</label><input placeholder="informe o sobrenome"
+							name="sobrenome" id="sobrenome" class="validade" th:field="*{sobrenome}">
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col s6">
+						<div class="input-field">
+							<label for="idade" class="active">Idade</label>
+							<input placeholder="informe a idade" name="idade" id="idade" class="validade" th:field="*{idade}">
+						</div>
+					</div>
+
+					<div class="col s6">
+						<div class="input-field">
+							<label for="sexopessoa" class="active">Sexo</label>
+							<select class="browser-default" th:field="*{sexopessoa}">
+								<option value="" disabled selected>--[Selecione]</option>
+								<option value="MASCULINO" th:text="Masculino"></option>
+								<option value="FEMININO" th:text="Feminino"></option>
+							</select>
+						</div>
+					</div>
+				</div>
 
 
-	<button onclick="window.location.href='listapessoas'" class="waves-effect waves-light btn btn-listapessoas"
-		type="button">Lista de Pessoas</button>
+				<div class="row">
+					<div class="input-field col s12">
+						<label for="cep" class="active">Cep</label><input placeholder="informe um cep válido" name="cep"
+							id="cep" class="validade" th:field="*{cep}">
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="input-field col s12">
+						<label for="rua" class="active">Rua</label><input name="rua" id="rua" class="validade"
+							th:field="*{rua}">
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="input-field col s12">
+						<label for="bairro" class="active">Bairro</label><input name="bairro" id="bairro" class="validade"
+							th:field="*{bairro}">
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="input-field col s12">
+						<label for="cidade" class="active">Cidade</label><input name="cidade" id="cidade" class="validade"
+							th:field="*{cidade}">
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="input-field col s12">
+						<label for="uf" class="active">Uf</label><input name="uf" id="uf" class="validade" th:field="*{uf}">
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="input-field col s12">
+						<label for="ibge" class="active">Ibge</label><input name="ibge" id="ibge" class="validade"
+							th:field="*{ibge}">
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="input-field col s12">
+						<input class="waves-effect waves-light btn btn-submit" th:class="${'btn-submit'}" value="salvar"
+							type="submit">
+					</div>
+				</div>
+			</form>
+		</fieldset>
+		</br>
+		</br>
+
+		<fieldset>
+    <legend>Campos de pesquisa</legend>
+    <form th:action="@{/buscapornome}" method="get" class="input-field col s12"
+        onsubmit="return validarBusca()? true : false">
+        <div class="row">
+            <div class="input-field col s6">
+                <label for="nomevalor" class="active">BuscarNome</label>
+                <input placeholder="digite um nome" name="nomevalor" id="nomevalor" class="validade">
+            </div>
+            <div class="input-field col s6">
+                <label for="pesqsexo" class="active">Sexo</label>
+                <select class="browser-default" name="pesqsexo" id="pesqsexo">
+                    <option  value="">--[Todos]</option>
+                    <option value="MASCULINO" th:text="Masculino"></option>
+                    <option value="FEMININO" th:text="Feminino"></option>
+                </select>
+            </div>
+        </div>
+        <input class="waves-effect waves-light btn btn-submit" th:class="${'btn-submit'}" value="buscar" type="submit">
+    </form>
+</fieldset>
 
 
+		</br>
+		</br>
 
-	<table class="striped">
-		<thead>
-			<tr>
-				<th class="table-header">ID</th>
-				<th class="table-header">NOME</th>
-				<th class="table-header">SOBRENOME</th>
-				<th class="table-header">IDADE</th>
-				<th class="table-header">EDITAR</th>
-				<th class="table-header">EXCLUIR</th>
+		<button onclick="window.location.href='listapessoas'" class="waves-effect waves-light btn btn-submit"
+			type="button">Lista de Pessoas</button>
+
+
+		<table class="striped">
+			<thead>
+				<tr>
+					<th class="table-header">ID</th>
+					<th class="table-header">NOME</th>
+					<th class="table-header">SOBRENOME</th>
+					<th class="table-header">IDADE</th>
+					<th class="table-header">EDITAR</th>
+					<th class="table-header">EXCLUIR</th>
+				</tr>
+			</thead>
+			<tr th:each="pessoa : ${pessoas}">
+				<td class="table-cell" th:text="${pessoa.id}"></td>
+				<td class="table-cell"><a th:href="@{'/telefones/' + ${pessoa.id}}"><span
+							th:text="${pessoa.nome}"></span></a></td>
+				<td class="table-cell" th:text="${pessoa.sobrenome}"></td>
+				<td class="table-cell" th:text="${pessoa.idade}"></td>
+				<td class="table-cell"><a th:href="@{/editarpessoa/{idpessoa}(idpessoa=${pessoa.id})}"
+						class="waves-effect waves-light btn btn-editarpessoa" th:class="${'btn-editarpessoa'}">Editar</a>
+				</td>
+				<td class="table-cell"><a th:href="@{/excluirpessoa/{idpessoa}(idpessoa=${pessoa.id})}"
+						class="waves-effect waves-light btn btn-excluirpessoa" th:class="${'btn-excluirpessoa'}">Excluir</a>
+				</td>
 			</tr>
-		</thead>
-		<tr th:each="pessoa : ${pessoas}">
-			<td class="table-cell" th:text="${pessoa.id}"></td>
-			<td class="table-cell"><a th:href="@{'/telefones/' + ${pessoa.id}}"><span
-						th:text="${pessoa.nome}"></span></a></td>
-			<td class="table-cell" th:text="${pessoa.sobrenome}"></td>
-			<td class="table-cell" th:text="${pessoa.idade}"></td>
-			<td class="table-cell"><a th:href="@{/editarpessoa/{idpessoa}(idpessoa=${pessoa.id})}"
-					class="waves-effect waves-light btn btn-editarpessoa" th:class="${'btn-editarpessoa'}">Editar</a>
-			</td>
-			<td class="table-cell"><a th:href="@{/excluirpessoa/{idpessoa}(idpessoa=${pessoa.id})}"
-					class="waves-effect waves-light btn btn-excluirpessoa" th:class="${'btn-excluirpessoa'}">Excluir</a>
-			</td>
-		</tr>
-	</table>
+		</table>
 
-
+	</body>
 
 	<!-- Compiled and minified JavaScript -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
@@ -311,8 +340,5 @@
 		});
 
 	</script>
-
-</body>
-
 
 </html>
