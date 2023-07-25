@@ -16,7 +16,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableTransactionManagement
 @EnableWebMvc
 public class Spring6Application {
-
+	
 	public static void main(String[] args) {
 		SpringApplication.run(Spring6Application.class, args);
 		

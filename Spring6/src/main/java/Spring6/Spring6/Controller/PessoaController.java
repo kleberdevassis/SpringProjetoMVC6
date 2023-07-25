@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +28,8 @@ public class PessoaController {
 	@Autowired
 	TelefoneRepository telefoneRepository;
 
+	@Autowired
+	ReportUtil reportUtil;
 	
 	@GetMapping(value = "**/cadastro")
 	public ModelAndView inicio() {
@@ -81,7 +85,26 @@ public class PessoaController {
 	    return andView;
 	}
 
-	
+	@GetMapping(value="**/buscapornome")
+	public void imprimePdf(@RequestParam("nomevalor") String nomevalor,
+			@RequestParam("pesqsexo")String pesqsexo, HttpServletRequest request, HttpServletRequest response) {
+		
+		
+		List<Pessoa> pessoas = new ArrayList<Pessoa>();
+		if(pesqsexo != null && !pesqsexo.isEmpty()&& nomevalor != null && !nomevalor.isEmpty())  {
+			pessoas = pessoaRepository.buscaPessoaPorSexo(nomevalor, pesqsexo);
+		}else if(nomevalor != null && !nomevalor.isEmpty()) {
+			pessoas = pessoaRepository.buscaPessoaPorNome(nomevalor);
+		}else {
+			Iterable<Pessoa> iterator = pessoaRepository.findAll();
+			for(Pessoa pessoa : iterator) {
+				pessoas.add(pessoa);
+			}
+		}
+		
+		//chame o serviço que faz a geração do relatorio
+		
+	}
 	
 	
 	@GetMapping(value="/excluirpessoa/{idpessoa}")
