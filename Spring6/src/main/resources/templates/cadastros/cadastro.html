@@ -179,8 +179,8 @@
 
 		<fieldset>
     <legend>Campos de pesquisa</legend>
-    <form th:action="@{/buscapornome}" method="get" class="input-field col s12"
-        onsubmit="return validarBusca()? true : false" id="buscapornome">
+    <form th:action="@{/buscapornome}" method="post" class="input-field col s12"
+         id="buscapornome">
         <div class="row">
             <div class="input-field col s6">
                 <label for="nomevalor" class="active">BuscarNome</label>
@@ -196,15 +196,16 @@
             </div>
         </div>
         <input class="waves-effect waves-light btn btn-submit" th:class="${'btn-submit'}" value="Pdf"
-         type="submit" onclick="document.getElementById('buscapornome').method = 'get'">
+         type="submit" onclick="document.getElementById('/buscapornome').method = 'get'">
         <input class="waves-effect waves-light btn btn-submit" th:class="${'btn-submit'}" value="buscar" type="submit">
     </form>
+    
 </fieldset>
 
 
 		</br>
 		</br>
-
+        
 		<button onclick="window.location.href='listapessoas'" class="waves-effect waves-light btn btn-submit"
 			type="button">Lista de Pessoas</button>
 
@@ -262,6 +263,7 @@
 	</script>
 
 
+<!--
 	<script type="text/javascript">
 		function validarBusca() {
 			nomevalor = document.getElementById('nomevalor').value;
@@ -273,8 +275,7 @@
 			return true;
 		}
 
-	</script>
-
+	</script> -->
 	<script>
 
 		$(document).ready(function () {

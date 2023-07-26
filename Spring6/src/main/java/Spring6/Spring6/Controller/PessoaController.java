@@ -86,10 +86,11 @@ public class PessoaController {
 	    return andView;
 	}
 
-	@GetMapping(value="**/buscapornome")
+	@GetMapping(value="**/buscandonome")
 	public void imprimePdf(@RequestParam("nomevalor") String nomevalor,
-			@RequestParam("pesqsexo")String pesqsexo, HttpServletRequest request, HttpServletResponse response) throws Exception{
-		
+			@RequestParam("pesqsexo")String pesqsexo,
+			HttpServletRequest request,
+			HttpServletResponse response) throws Exception{
 		
 		List<Pessoa> pessoas = new ArrayList<Pessoa>();
 		if(pesqsexo != null && !pesqsexo.isEmpty()&& nomevalor != null && !nomevalor.isEmpty())  {
