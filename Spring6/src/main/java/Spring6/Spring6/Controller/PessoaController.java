@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -87,7 +88,7 @@ public class PessoaController {
 
 	@GetMapping(value="**/buscapornome")
 	public void imprimePdf(@RequestParam("nomevalor") String nomevalor,
-			@RequestParam("pesqsexo")String pesqsexo, HttpServletRequest request, HttpServletRequest response) {
+			@RequestParam("pesqsexo")String pesqsexo, HttpServletRequest request, HttpServletResponse response) throws Exception{
 		
 		
 		List<Pessoa> pessoas = new ArrayList<Pessoa>();
@@ -95,6 +96,10 @@ public class PessoaController {
 			pessoas = pessoaRepository.buscaPessoaPorSexo(nomevalor, pesqsexo);
 		}else if(nomevalor != null && !nomevalor.isEmpty()) {
 			pessoas = pessoaRepository.buscaPessoaPorNome(nomevalor);
+			
+		}else if(pesqsexo != null && !pesqsexo.isEmpty()) {
+			pessoas = pessoaRepository.buscaPessoaPorSexo(pesqsexo);
+			
 		}else {
 			Iterable<Pessoa> iterator = pessoaRepository.findAll();
 			for(Pessoa pessoa : iterator) {
@@ -102,7 +107,17 @@ public class PessoaController {
 			}
 		}
 		
-		//chame o serviço que faz a geração do relatorio
+		byte[] pdf = reportUtil.gerarRelatorio(pessoas, "pessoa", request.getServletContext());
+		
+		response.setContentLength(pdf.length);
+		
+		response.setContentType("application/octet-stream");
+		
+		String headerKey = "Content-Disposition";
+		String headerValue = String.format("attachment; filename=\"%s\"", "relatorio.pdf");
+		response.setHeader(headerKey, headerValue);
+		
+		response.getOutputStream().write(pdf);
 		
 	}
 	
