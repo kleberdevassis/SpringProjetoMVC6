@@ -94,25 +94,18 @@
 				</div>
 
 				<div class="row">
-					<div class="input-field col s6">
+					<div class="input-field col s12">
 						<label for="nome" class="active">Nome</label><input placeholder="informe o nome" name="nome"
 							th:field="*{nome}" id="nome" class="validate">
 					</div>
+					</div>
+					
+					<div class="row">
 					<div class="input-field col s6">
 						<label for="sobrenome" class="active">Sobrenome</label><input placeholder="informe o sobrenome"
 							name="sobrenome" id="sobrenome" class="validade" th:field="*{sobrenome}">
 					</div>
-				</div>
-
-				<div class="row">
-					<div class="col s6">
-						<div class="input-field">
-							<label for="idade" class="active">Idade</label>
-							<input placeholder="informe a idade" name="idade" id="idade" class="validade" th:field="*{idade}">
-						</div>
-					</div>
-
-					<div class="col s6">
+				<div class="col s6">
 						<div class="input-field">
 							<label for="sexopessoa" class="active">Sexo</label>
 							<select class="browser-default" th:field="*{sexopessoa}">
@@ -124,6 +117,21 @@
 					</div>
 				</div>
 
+				<div class="row">
+					<div class="col s6">
+						<div class="input-field">
+							<label for="idade" class="active">Idade</label>
+							<input placeholder="informe a idade" name="idade" id="idade" class="validade" th:field="*{idade}">
+						</div>
+					</div>
+
+					<div class="input-field col s6">
+							<label for="profissao" class="active">Profissao</label>
+							<select class="browser-default" th:field="*{profissao}" id="profissao">
+								<option th:each = "p : ${profissoes}" th:value="${p.id}" th:text= "${p.nome}"></option>
+							</select>
+					</div>
+				</div>
 
 				<div class="row">
 					<div class="input-field col s12">
@@ -195,7 +203,7 @@
                 </select>
             </div>
         </div>
-        <input class="waves-effect waves-light btn btn-submit" th:class="${'btn-submit'}" value="Pdf"
+        <input class="waves-effect waves-light btn btn-submit" value="Pdf"
          type="submit" onclick="document.getElementById('buscapornome').method = 'get'">
         <input class="waves-effect waves-light btn btn-submit" th:class="${'btn-submit'}" value="buscar" type="submit">
     </form>

@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import Spring6.Spring6.Model.Pessoa;
 import Spring6.Spring6.Model.Telefone;
 import Spring6.Spring6.Repository.PessoaRepository;
+import Spring6.Spring6.Repository.ProfissaoRepository;
 import Spring6.Spring6.Repository.TelefoneRepository;
 
 @Controller
@@ -32,10 +33,16 @@ public class PessoaController {
 	@Autowired
 	ReportUtil reportUtil;
 	
+	@Autowired
+	ProfissaoRepository profissaoRepository;
+	
 	@GetMapping(value = "**/cadastro")
 	public ModelAndView inicio() {
 		ModelAndView andView = new ModelAndView("cadastros/cadastro");
 		andView.addObject("pessoaobj", new Pessoa());
+		Iterable<Pessoa> pessoasIt = pessoaRepository.findAll();
+		andView.addObject("pessoas", pessoasIt);
+		andView.addObject("profissoes", profissaoRepository.findAll());
 		return andView;
 		
 	}
@@ -47,7 +54,7 @@ public class PessoaController {
 		Iterable<Pessoa> pessoasit = pessoaRepository.findAll();
 		andView.addObject("pessoaobj", new Pessoa());
 		andView.addObject("pessoas", pessoasit);
-		
+		andView.addObject("profissoes", profissaoRepository.findAll());
 		return andView;
 	}
 	
@@ -66,6 +73,7 @@ public class PessoaController {
 		Optional<Pessoa> pessoa = pessoaRepository.findById(idpessoa);
 		ModelAndView andView = new ModelAndView("cadastros/cadastro");
 		andView.addObject("pessoaobj", pessoa.get());
+		andView.addObject("profissoes", profissaoRepository.findAll());
 		return andView;
 	}
 	
@@ -86,7 +94,7 @@ public class PessoaController {
 	    return andView;
 	}
 
-	@GetMapping(value="**/buscandonome")
+	@GetMapping(value="**/buscapornome")
 	public void imprimePdf(@RequestParam("nomevalor") String nomevalor,
 			@RequestParam("pesqsexo")String pesqsexo,
 			HttpServletRequest request,
