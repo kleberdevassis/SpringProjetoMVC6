@@ -1,6 +1,7 @@
 package Spring6.Spring6.Model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,6 +13,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Pessoa implements Serializable{
@@ -39,7 +44,18 @@ public class Pessoa implements Serializable{
 	@Enumerated(EnumType.STRING)
 	private Cargo cargo;
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Temporal(TemporalType.DATE)
+	Date dataNascimento;
 	
+	
+	
+	public Date getDataNascimento() {
+		return dataNascimento;
+	}
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
 	public Cargo getCargo() {
 		return cargo;
 	}
