@@ -73,7 +73,7 @@
 </head>
 
 
-	<a class="waves-effect waves-light btn" href="/login">Voltar</a>
+	<a class="waves-effect waves-light btn" th:class="${'btn-submit'}" href="/login">Voltar</a>
 	
 	<body>
 
@@ -132,6 +132,17 @@
 							</select>
 					</div>
 				</div>
+				
+				<div class="row">
+					<div class="input-field col s12">
+							<label for="cargo" class="active">Cargo</label>
+							<select class="browser-default" th:field="*{cargo}" id="cargo">
+								<option th:each = "c : ${T(Spring6.Spring6.Model.Cargo).values()}" th:value="${c.valor}" th:text= "${c.nome}"></option>
+							</select>
+					</div>
+				</div>
+				
+				
 
 				<div class="row">
 					<div class="input-field col s12">
@@ -186,29 +197,27 @@
 		</br>
 
 		<fieldset>
-    <legend>Campos de pesquisa</legend>
-    <form th:action="@{/buscapornome}" method="post" class="input-field col s12"
-         id="buscapornome">
-        <div class="row">
-            <div class="input-field col s6">
-                <label for="nomevalor" class="active">BuscarNome</label>
-                <input placeholder="digite um nome" name="nomevalor" id="nomevalor" class="validade">
-            </div>
-            <div class="input-field col s6">
-                <label for="pesqsexo" class="active">Sexo</label>
-                <select class="browser-default" name="pesqsexo" id="pesqsexo">
-                    <option  value="">--[Todos]</option>
-                    <option value="MASCULINO" th:text="Masculino"></option>
-                    <option value="FEMININO" th:text="Feminino"></option>
-                </select>
-            </div>
-        </div>
-        <input class="waves-effect waves-light btn btn-submit" value="Pdf"
-         type="submit" onclick="document.getElementById('buscapornome').method = 'get'">
-        <input class="waves-effect waves-light btn btn-submit" th:class="${'btn-submit'}" value="buscar" type="submit">
-    </form>
-    
-</fieldset>
+			<legend>Campos de pesquisa</legend>
+			<form th:action="@{/buscapornome}" method="post" class="input-field col s12" id="buscapornome">
+				<div class="row">
+					<div class="input-field col s6">
+						<label for="nomevalor" class="active">BuscarNome</label>
+						<input placeholder="digite um nome" name="nomevalor" id="nomevalor" class="validade">
+					</div>
+					<div class="input-field col s6">
+						<label for="pesqsexo" class="active">Sexo</label>
+						<select class="browser-default" name="pesqsexo" id="pesqsexo">
+							<option value="">--[Todos]</option>
+							<option value="MASCULINO" th:text="Masculino"></option>
+							<option value="FEMININO" th:text="Feminino"></option>
+						</select>
+					</div>
+				</div>
+				<input class="waves-effect waves-light btn btn-submit" value="Pdf" type="submit" th:class="${'btn-submit'}"
+					onclick="document.getElementById('buscapornome').method = 'get'">
+				<input class="waves-effect waves-light btn btn-submit" th:class="${'btn-submit'}" value="buscar" type="submit">
+			</form>
+		</fieldset>
 
 
 		</br>

@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,6 +36,17 @@ public class Pessoa implements Serializable{
 		return telefones;
 	}
 	
+	@Enumerated(EnumType.STRING)
+	private Cargo cargo;
+	
+	
+	public Cargo getCargo() {
+		return cargo;
+	}
+	public void setCargo(Cargo cargo) {
+		this.cargo = cargo;
+	}
+
 	private String cep;
 	private String rua;
 	private String bairro;
