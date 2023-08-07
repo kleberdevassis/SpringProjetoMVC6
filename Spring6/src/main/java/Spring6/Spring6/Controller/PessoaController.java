@@ -1,5 +1,6 @@
 package Spring6.Spring6.Controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import Spring6.Spring6.Model.Pessoa;
@@ -46,9 +48,19 @@ public class PessoaController {
 		return andView;
 		
 	}
-	@PostMapping(value = "**/salvarpessoa")
-	public ModelAndView salvarPessoa(Pessoa pessoa) {
+	@PostMapping(value = "**/salvarpessoa", consumes= {"multipart/form-data"})
+	public ModelAndView salvarPessoa(Pessoa pessoa, final MultipartFile file) throws IOException {
 		pessoa.setTelefones(telefoneRepository.getTelefones(pessoa.getId()));
+		
+		if(file.getSize() > 0) {
+			pessoa.setCurriculo(file.getBytes());
+		}else {
+			if(pessoa.getId() !=null && pessoa.getId() > 0) {
+				byte[] curriculoTempo = pessoaRepository.findById(pessoa.getId()).get().getCurriculo();
+				pessoa.setCurriculo(curriculoTempo);
+			}
+		}
+		
 		pessoaRepository.save(pessoa);
 		ModelAndView andView = new ModelAndView("cadastros/cadastro");
 		Iterable<Pessoa> pessoasit = pessoaRepository.findAll();

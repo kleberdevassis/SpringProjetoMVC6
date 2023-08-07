@@ -10,6 +10,9 @@
 
 	<script src="https://code.jquery.com/jquery-3.6.4.min.js"
 		integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+		
+		<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+		<link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 
 	<!-- Compiled and minified CSS -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -81,11 +84,10 @@
 </br>
 </br>
 </br>
->
 		<fieldset>
 			<legend>Cadastro de Pessoas</legend>
 			<form action="salvarpessoa" method="post" th:object="${pessoaobj}" id="formpessoa" class="input-field col s12"
-				onsubmit="return validarCampos()? true : false">
+				onsubmit="return validarCampos()? true : false" enctype="multipart/form-data">
 
 				<div class="row">
 					<div class="input-field col s6">
@@ -121,7 +123,7 @@
 					<div class="col s6">
 						<div class="input-field">
 							<label for="idade" class="active">Idade</label>
-							<input placeholder="informe a idade" name="idade" id="idade" class="validade" th:field="*{idade}">
+							<input placeholder="informe a idade" name="idade" id="idade" class="validate" th:field="*{idade}">
 						</div>
 					</div>
 
@@ -134,15 +136,26 @@
 				</div>
 				
 				<div class="row">
-					<div class="input-field col s12">
+					<div class="input-field col s6">
 							<label for="cargo" class="active">Cargo</label>
 							<select class="browser-default" th:field="*{cargo}" id="cargo">
 								<option th:each = "c : ${T(Spring6.Spring6.Model.Cargo).values()}" th:value="${c.valor}" th:text= "${c.nome}"></option>
 							</select>
 					</div>
+					<div class="input-field col s6">
+							<label for="dataNascimento" class="active">Data Nascimento:</label>
+							<input type="date" id="dataNascimento" th:field="*{dataNascimento}" name="dataNascimento" placeholder="Data Nasc.">
+					</div>
+					
+					
 				</div>
 				
-				
+				<div class="row">
+					<div class="input-field col s12">
+						<label for="file" class="active">Curriculo</label><input type="file" name="file"
+							id="file" class="validate">
+					</div>
+				</div>
 
 				<div class="row">
 					<div class="input-field col s12">
@@ -296,6 +309,13 @@
 	<script>
 
 		$(document).ready(function () {
+			
+			
+			$('#dataNascimento').datepicker({
+				showOtherMonths: true,
+				format: 'yyyy-mm-dd'
+			});
+			
 
 			function limpa_formulário_cep() {
 				// Limpa valores do formulário de cep.
