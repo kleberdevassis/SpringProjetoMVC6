@@ -153,7 +153,7 @@
 				<div class="row">
 					<div class="input-field col s12">
 						<label for="file" class="active">Curriculo</label><input type="file" name="file"
-							id="file" class="validate">
+							id="file" class="file-field input-field">
 					</div>
 				</div>
 
@@ -246,7 +246,7 @@
 					<th class="table-header">ID</th>
 					<th class="table-header">NOME</th>
 					<th class="table-header">SOBRENOME</th>
-					<th class="table-header">IDADE</th>
+					<th class="table-header">CURRICULO</th>
 					<th class="table-header">EDITAR</th>
 					<th class="table-header">EXCLUIR</th>
 				</tr>
@@ -256,7 +256,12 @@
 				<td class="table-cell"><a th:href="@{'/telefones/' + ${pessoa.id}}"><span
 							th:text="${pessoa.nome}"></span></a></td>
 				<td class="table-cell" th:text="${pessoa.sobrenome}"></td>
-				<td class="table-cell" th:text="${pessoa.idade}"></td>
+				
+				<td><a th:href="@{/baixarcurriculo/{idpessoa}(idpessoa=${pessoa.id})}" >Download</a> </td>
+				
+				<!-- <td class="table-cell"><a th:href="@{/baixarcurriculo/{idpessoa}(idpessoa=${pessoa.id})}"
+						class="waves-effect waves-light btn btn-editarpessoa" th:class="${'btn-editarpessoa'}">Download</a> -->
+				
 				<td class="table-cell"><a th:href="@{/editarpessoa/{idpessoa}(idpessoa=${pessoa.id})}"
 						class="waves-effect waves-light btn btn-editarpessoa" th:class="${'btn-editarpessoa'}">Editar</a>
 				</td>

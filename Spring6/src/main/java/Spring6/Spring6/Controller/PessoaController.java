@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -50,14 +51,20 @@ public class PessoaController {
 	}
 	@PostMapping(value = "**/salvarpessoa", consumes= {"multipart/form-data"})
 	public ModelAndView salvarPessoa(Pessoa pessoa, final MultipartFile file) throws IOException {
+		
 		pessoa.setTelefones(telefoneRepository.getTelefones(pessoa.getId()));
+		
 		
 		if(file.getSize() > 0) {
 			pessoa.setCurriculo(file.getBytes());
+			pessoa.setTipoFileCurriculo(file.getContentType());
+			pessoa.setNomeFileCurriculo(file.getOriginalFilename());
 		}else {
 			if(pessoa.getId() !=null && pessoa.getId() > 0) {
-				byte[] curriculoTempo = pessoaRepository.findById(pessoa.getId()).get().getCurriculo();
-				pessoa.setCurriculo(curriculoTempo);
+				Pessoa pessoalTemp = pessoaRepository.findById(pessoa.getId()).get();
+				pessoa.setCurriculo(pessoalTemp.getCurriculo());
+				pessoa.setTipoFileCurriculo(pessoalTemp.getTipoFileCurriculo());
+				pessoa.setNomeFileCurriculo(pessoalTemp.getNomeFileCurriculo());
 			}
 		}
 		
@@ -105,6 +112,30 @@ public class PessoaController {
 	    andView.addObject("pessoaobj", new Pessoa());
 	    return andView;
 	}
+	
+	@GetMapping("/baixarcurriculo/{idpessoa}")
+	public void baixarcurriculo(@PathVariable("idpessoa")Long idpessoa, HttpServletResponse response) throws IOException {
+		
+		Pessoa pessoa = pessoaRepository.findById(idpessoa).get();
+		if(pessoa.getCurriculo() != null) {
+			
+			/*tamanho da resposta*/
+			response.setContentLength(pessoa.getCurriculo().length);
+			
+			/*pode ser generico  ->   application/octet-stream*/
+			response.setContentType(pessoa.getTipoFileCurriculo());
+			
+			/*define o cabeçalho*/
+			String headerkey = "Content-Diposition";
+			String headerValue = String.format("attachment; filename=\"%s\"", pessoa.getNomeFileCurriculo());
+			response.setHeader(headerkey, headerValue);
+			
+			response.getOutputStream().write(pessoa.getCurriculo());
+		}
+		
+		
+	}
+	
 
 	@GetMapping(value="**/buscapornome")
 	public void imprimePdf(@RequestParam("nomevalor") String nomevalor,
