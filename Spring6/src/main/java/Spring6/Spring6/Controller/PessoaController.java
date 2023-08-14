@@ -125,7 +125,7 @@ public class PessoaController {
 			/*pode ser generico  ->   application/octet-stream*/
 			response.setContentType(pessoa.getTipoFileCurriculo());
 			
-			/*define o cabeçalho*/
+			/*define o cabeçalho.*/
 			String headerkey = "Content-Diposition";
 			String headerValue = String.format("attachment; filename=\"%s\"", pessoa.getNomeFileCurriculo());
 			response.setHeader(headerkey, headerValue);
