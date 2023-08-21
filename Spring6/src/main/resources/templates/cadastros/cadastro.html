@@ -18,7 +18,22 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
 
+
+
+
 	<style>
+		
+		table {
+	width: 100%
+}
+
+table td, table th{
+	border: 1px solid grey;
+}
+table th{
+	background: #eee;
+}
+		
 		body {
 			background-color: rgb(255, 255, 255);
 			color: #fff;
@@ -251,13 +266,15 @@
 					<th class="table-header">EXCLUIR</th>
 				</tr>
 			</thead>
-			<tr th:each="pessoa : ${pessoas}">
+			<tr th:each="pessoa : ${pessoas.content}">
 				<td class="table-cell" th:text="${pessoa.id}"></td>
 				<td class="table-cell"><a th:href="@{'/telefones/' + ${pessoa.id}}"><span
 							th:text="${pessoa.nome}"></span></a></td>
 				<td class="table-cell" th:text="${pessoa.sobrenome}"></td>
 				
-				<td><a th:href="@{/baixarcurriculo/{idpessoa}(idpessoa=${pessoa.id})}" >Download</a> </td>
+				<td><a th:if="${pessoa.curriculo != null}" th:href="@{/baixarcurriculo/{idpessoa}(idpessoa=${pessoa.id})}" >Download</a> 
+				    <a th:if="${pessoa.curriculo == null}" style="color:red;">Vazio</a>
+				</td>
 				
 				<!-- <td class="table-cell"><a th:href="@{/baixarcurriculo/{idpessoa}(idpessoa=${pessoa.id})}"
 						class="waves-effect waves-light btn btn-editarpessoa" th:class="${'btn-editarpessoa'}">Download</a> -->
