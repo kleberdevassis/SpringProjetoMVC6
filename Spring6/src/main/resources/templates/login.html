@@ -15,28 +15,40 @@
 	
 	<style type="text/css">form input[type=submit] {
     color:white;
-    }</style>
+    }
+    
+    .col .row{
+		margin-right: 0%;
+	}
+    
+     form{
+		margin-left: 35%;
+		margin-top: 11%;
+	}
+    
+    </style>
     
 </head>
 
 <body>
-	<h1>acesso ao sistema</h1>
+	
 	<form th:action="@{/login}" method="post" class="col s12">
+		<h5>acesso ao sistema</h5>
 		<div class="row">
 			<div class="input-fiel col s6">
-				<label>login</label> <input type="text" name="username">
+				<label>login</label> <input type="text" name="username" style="border-radius: 7px;">
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="input-fiel col s6">
-				<label>senha</label> <input type="password" name="password">
+				<label>senha</label> <input type="password" name="password" style="border-radius: 7px;">
 			</div>
 		</div>
          
          <div class="row">
          <div class="input-field col s6">
-         <input name="logar" type="submit" value="logar" class="waves-effect waves-light btn">
+         <input name="logar" type="submit" value="Acessar" class="waves-effect waves-light btn">
          
          </div>
          
